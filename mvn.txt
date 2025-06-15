@@ -1,0 +1,76 @@
+1. Create a New User
+To create a new user on your system:
+
+sudo adduser siva
+2. Configure SSH for Remote Access
+Edit the SSH configuration file to allow password authentication and disable root login:
+
+Open the SSH configuration file:
+
+sudo vi /etc/ssh/sshd_config
+Ensure the following lines are configured correctly:
+
+Disable root login:
+PermitRootLogin no
+Enable password authentication:
+PasswordAuthentication yes
+Restart the SSH service to apply the changes:
+
+sudo service sshd restart
+3. Install OpenJDK 17
+Navigate to the /opt directory and download OpenJDK 17:
+
+cd /opt
+wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
+Extract the downloaded archive:
+
+tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
+Move the extracted JDK to a more permanent location:
+
+sudo mv jdk-17.0.2/ /opt/jdk-17
+Install Java on Windows Click Here
+
+4. Install Maven 3.8.8
+Download Maven 3.8.8:
+
+cd /opt
+wget https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+Extract the Maven archive:
+
+tar -xzvf apache-maven-3.8.8-bin.tar.gz
+5. Set Up Environment Variables
+To ensure that Java and Maven are available to all users, follow these steps:
+
+Open the /etc/profile file:
+
+sudo vi /etc/profile
+Add the following lines at the bottom of the file:
+
+export JAVA_HOME=/opt/jdk-17
+export PATH=$PATH:$JAVA_HOME/bin
+export M2_HOME=/opt/apache-maven-3.8.8
+export PATH=$PATH:$M2_HOME/bin
+Save the file and apply the changes:
+
+source /etc/profile
+6. Verify the Installation
+To check if Java is correctly installed, run:
+
+java -version
+You should see output similar to:
+openjdk version "17.0.2" 2022-01-18
+OpenJDK Runtime Environment (build 17.0.2+8-86)
+OpenJDK 64-Bit Server VM (build 17.0.2+8-86, mixed mode, sharing)
+To verify Maven installation, run:
+
+mvn --version
+You should see output similar to:
+Apache Maven 3.8.8
+Maven home: /opt/apache-maven-3.8.8
+Java version: 17.0.2, vendor: Oracle Corporation, runtime: /opt/jdk-17
+Apache Directory Structure
+Maven s/w is not a executable file.
+bin => Binary Files
+conf => Configuration file, min important file called settings.xml
+lib => it contains all jar files
+boot => will help in runtime
